@@ -2,11 +2,6 @@
 <html>
 <head>
 <title>Page Title</title>
-<style>
-  .wonderful-message-agent{
-    white-space: pre-line !important;
-  }
-</style>
 <script>
   (() => {
   const s = document.createElement('script');
@@ -51,6 +46,16 @@
     });
   };
   document.head.appendChild(s);
+  const style = document.createElement("style");
+  style.type = "text/css";
+  
+  style.textContent = `
+    .wonderful-message-agent{
+      white-space: pre-line !important;
+    }
+  `;
+
+document.head.appendChild(style);
 })();
   
 </script>
