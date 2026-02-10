@@ -3,60 +3,80 @@
 <head>
 <title>Page Title</title>
 <script>
-  (() => {
+    (() => {
   const s = document.createElement('script');
   s.src = 'https://hertz.app.sb.wonderful.ai/embed/wonderful-chat.js';
   s.onload = () => {
     new window.WonderfulChat({
       environment: "hertz.api.sb.wonderful.ai",
       agentId: "15a45faa-a01e-4788-9c3f-b9c3986ae436",
-
-      // Core settings
       agentName: 'Βαγγέλης',
       buttonText: 'Chat with us',
       placeholderText: 'Type your message...',
       isRTL: false,
-
-      // Main theme colors
       primaryColor: '#ffcf00',
       accentColor: '#000000',
       textColor: '#333333',
-
-      // Chat appearance
       headerBgColor: '#ffcf00',
       headerTextColor: '#000000',
-
-      // Message bubbles
       userBubbleColor: '#ffcf00',
       userTextColor: '#000000',
       agentBubbleColor: '#ffffff',
       agentTextColor: '#333333',
-
-      // Background colors
       windowBgColor: '#ffffff',
       messagesBgColor: '#f5f7fb',
       inputBgColor: '#f5f7fb',
-
-      // Status indicators
       statusColor: '#4CAF50',
       errorColor: '#F44336',
-
-      // Optional logo (can be removed)
       logoUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fa/88/9e/fa889e4b-e4a6-5341-57f0-0116d2f37f57/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png'
     });
+
+    // --- Linkify hotfix ---
+    const escapeHtml = (s) =>
+      s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+    const linkify = (text) => {
+      const escaped = escapeHtml(text);
+      const urlRegex = /https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_+.~#?&\/=]*)/g;
+      const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+      return escaped
+        .replace(urlRegex, (match) => {
+          const trailingPunct = /[.,;:!?)]+$/.exec(match);
+          const url = trailingPunct ? match.slice(0, trailingPunct.index) : match;
+          const after = trailingPunct ? trailingPunct[0] : '';
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:underline">${url}</a>${after}`;
+        })
+        .replace(emailRegex, (email) => `<a href="mailto:${email}" style="color:#1a73e8;text-decoration:underline">${email}</a>`);
+    };
+
+    const processMsg = (el) => {
+      if (!el.dataset.linkified) {
+        el.innerHTML = linkify(el.textContent);
+        el.dataset.linkified = 'true';
+      }
+    };
+
+    new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        for (const node of m.addedNodes) {
+          if (node.nodeType !== 1) continue;
+          if (node.matches?.('.wonderful-message-agent')) processMsg(node);
+          node.querySelectorAll?.('.wonderful-message-agent').forEach(processMsg);
+        }
+      }
+    }).observe(document.body, { childList: true, subtree: true });
+    // --- End hotfix ---
   };
   document.head.appendChild(s);
   const style = document.createElement("style");
   style.type = "text/css";
-  
   style.textContent = `
     .wonderful-message-agent{
       white-space: pre-line !important;
     }
   `;
-
-document.head.appendChild(style);
-})();
+  document.head.appendChild(style);
+  })();
   
 </script>
 </head>
