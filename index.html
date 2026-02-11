@@ -79,6 +79,42 @@
   })();
   
 </script>
+    <style>
+  body {
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+
+  .post-it {
+    width: 250px;
+    min-height: 250px;
+    background: #fffb88;
+    padding: 20px;
+    box-shadow: 
+      0 4px 6px rgba(0, 0, 0, 0.2),
+      inset 0 -10px 20px rgba(0, 0, 0, 0.05);
+    transform: rotate(-2deg);
+    position: relative;
+    font-size: 18px;
+    line-height: 1.4;
+  }
+
+  /* Folded corner effect */
+  .post-it::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-top: 40px solid rgba(0, 0, 0, 0.1);
+  }
+</style>
 </head>
 <body style="background:beige">
     <div class="" dir="ltr" lang="en">
