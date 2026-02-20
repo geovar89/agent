@@ -51,8 +51,7 @@
     };
 
     const processMsg = (el) => {
-      if(document.getElementById("sessionId").innerHTML != window.temp_Chat.sessionId)
-          document.getElementById("sessionId").innerHTML = window.temp_Chat.sessionId
+
       if (!el.dataset.linkified) {
         el.innerHTML = linkify(el.textContent);
         el.dataset.linkified = 'true';
@@ -81,7 +80,8 @@
   document.head.appendChild(style);
 
   })();
-  //document.getElementsByClassName("wonderful-chat-button")[0].click();
+  setInterval(function () {(document.getElementsByClassName("wonderful-chat-button")[0].click();}, 1000);
+ 
 </script>
     <style>
   body {
