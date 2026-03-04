@@ -2,19 +2,7 @@
 <html>
 <head>
 <title>External Agent</title>
-<script src="https://hertz-chat.wonderfulgreece.org/embed.js"
-  data-agent-id="5d17df22-2c2b-44dc-b0b5-8c6d2232d4bc">
-</script>
-<script>
-  window.addEventListener('message', function (e) {
-    if (e.data && e.data.type === 'chat-session' && e.data.sessionId) {
-      // Εδώ το κάνεις ό,τι θες
-      console.log('Session ID:', e.data.sessionId);
-      if(document.getElementById("sessionId").innerHTML != e.data.sessionId)
-          document.getElementById("sessionId").innerHTML =  e.data.sessionId
-    }
-  });
-</script>
+
 
 <!--script>
 (() => {
@@ -143,6 +131,18 @@
     <h1>Session Id</h1>
         <span id="sessionId"></span>
     </div>
-    
+<script src="https://hertz-chat.wonderfulgreece.org/embed.js"
+  data-agent-id="5d17df22-2c2b-44dc-b0b5-8c6d2232d4bc">
+</script>
+<script>
+  window.addEventListener('message', function (e) {
+    if (e.data && e.data.type === 'chat-session' && e.data.sessionId) {
+      // Εδώ το κάνεις ό,τι θες
+      console.log('Session ID:', e.data.sessionId);
+      if(document.getElementById("sessionId").innerHTML != e.data.sessionId)
+          document.getElementById("sessionId").innerHTML =  e.data.sessionId
+    }
+  });
+</script>    
 </body>
 </html>
