@@ -7,29 +7,60 @@
   const s = document.createElement('script');
   s.src = 'https://hertz.app.sb.wonderful.ai/embed/wonderful-chat.js';
   s.onload = () => {
-    window.temp_Chat = new window.WonderfulChat({
+    new window.WonderfulChat({
       environment: "hertz.api.sb.wonderful.ai",
-      agentId: "15a45faa-a01e-4788-9c3f-b9c3986ae436",
-      agentName: 'Βαγγέλης',
+      agentId: "f7cd8251-b653-4dd4-b7cf-f71d9fa7b78b",
+
+      // Core settings
+      agentName: 'Eva Multiskill',
       buttonText: 'Chat with us',
       placeholderText: 'Type your message...',
       isRTL: false,
-      primaryColor: '#ffcf00',
-      accentColor: '#000000',
+
+      // Main theme colors
+      primaryColor: '#0066cc',
+      accentColor: '#004d99',
       textColor: '#333333',
-      headerBgColor: '#ffcf00',
-      headerTextColor: '#000000',
-      userBubbleColor: '#ffcf00',
-      userTextColor: '#000000',
+
+      // Chat appearance
+      headerBgColor: '#0066cc',
+      headerTextColor: '#ffffff',
+
+      // Message bubbles
+      userBubbleColor: '#0066cc',
+      userTextColor: '#ffffff',
       agentBubbleColor: '#ffffff',
       agentTextColor: '#333333',
+
+      // Background colors
       windowBgColor: '#ffffff',
       messagesBgColor: '#f5f7fb',
       inputBgColor: '#f5f7fb',
+
+      // Status indicators
       statusColor: '#4CAF50',
       errorColor: '#F44336',
+
+      // Optional callbacks
+      // onActionEnd: (event) => {
+      //   console.log("Chat ended", event);
+      // },
+      // onActionForward: (event) => {
+      //   console.log("Chat forwarded", event);
+      // },
+
+      // Optional metadata
+      // metadata: {
+      //   customerId: "12345",
+      //   plan: "pro",
+      // },
+
+      // Optional logo (can be removed)
       logoUrl: 'https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/fa/88/9e/fa889e4b-e4a6-5341-57f0-0116d2f37f57/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/1200x630wa.png'
     });
+  };
+  document.head.appendChild(s);
+})();
 
     // --- Linkify hotfix ---
     const escapeHtml = (s) =>
